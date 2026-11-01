@@ -1,0 +1,4 @@
+// Shipping rates must be supplied by a carrier integration (Correios/ Melhor Envio etc.).
+// This function does not invent a rate. Configure the carrier API and validate ZIP codes server-side.
+const cors={ 'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS' };
+Deno.serve(async(req)=>{if(req.method==='OPTIONS')return new Response('ok',{headers:cors});if(req.method!=='POST')return new Response(JSON.stringify({error:'Method not allowed'}),{status:405,headers:{...cors,'Content-Type':'application/json'}});return new Response(JSON.stringify({error:'Shipping provider not configured. No shipping quote was fabricated.'}),{status:503,headers:{...cors,'Content-Type':'application/json'}})});
